@@ -17,7 +17,7 @@ class TodoList extends React.Component {
       <ul>
         {
          model.items.map((item, idx) => {
-           return <TodoItem key={'todoitem-' + idx} value={item} ref={idx} onDelete={this.onDelete.bind(this, idx)} />;       
+           return <TodoItem key={'todoitem-' + idx} item={item} ref={idx} onMarkComplete={this.onMarkComplete.bind(this, item)} onDelete={this.onDelete.bind(this, item)} />;       
           })
         }
       </ul>
@@ -26,6 +26,10 @@ class TodoList extends React.Component {
 
   onDelete(idx) {
     this.props.deleteAction(idx);
+  }
+
+  onMarkComplete(item) {
+    this.props.markCompleteAction(item);
   }
 }
 

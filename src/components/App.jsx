@@ -14,7 +14,10 @@ class App extends React.Component {
 
   onClickEvent() {
 
-    this.props.genericAction(this.state.inputValue);
+    this.props.genericAction({
+      value: this.state.inputValue,
+      complete: false
+    });
   }
 
   onChange(evt) {

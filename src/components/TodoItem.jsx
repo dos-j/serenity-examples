@@ -8,14 +8,21 @@ export default class TodoItem extends Component {
 
   render() {
     const {
-      value,
+      item,
       ref,
-      onDelete
+      onDelete,
+      onMarkComplete
     } = this.props;
+    
+    const itemStyle = {};
+    if (item.complete) {
+      itemStyle.textDecoration = 'line-through';
+    }
 
     return (
       <li>
-        <span> {value} </span>
+        <span style={itemStyle}> {item.value} </span>
+        <button onClick={onMarkComplete}>DONE</button>
         <button onClick={onDelete}>X</button>
       </li>
     );

@@ -4,12 +4,13 @@ export TodoItem from './TodoItem';
 import TodoListBase from 'TodoList';
 
 export const App1 = ReactInjector(App, {
-  'genericAction' : 'SampleAction'
+  'genericAction' : 'AddTodoItemAction'
 }); 
 
 export const TodoList = ReactInjector(TodoListBase, {
   'model' : 'TodoModel',
-  'deleteAction': 'DeleteTodoItemAction'
+  'deleteAction': 'DeleteTodoItemAction',
+  'markCompleteAction': 'CompleteTodoItemAction'
 });
 
 

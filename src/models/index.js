@@ -1,12 +1,10 @@
 import serenity from 'serenitydi';
-console.log(serenity);
 
 serenity.registerState(() => {
   return {
-    items: ['Hello, World']
+    items: []
   };
 }, 'TodoModel', []);
-
 
 serenity.register((model) => {
 
@@ -18,11 +16,29 @@ serenity.register((model) => {
       ]
     });
   }
-}, 'SampleAction', ['TodoModel']);
+}, 'AddTodoItemAction', ['TodoModel']);
 
 serenity.register((model) => {
 
-  return function(idx) {
-    model.items = model.items.filter((item, index) => index !== idx);
+  return function(item) {
+    item.complete = true;
+    
+    model.setState({
+      items: [
+        ...model.items.map(existing => existing === item ? item : existing)
+      ]
+    });
+  }
+}, 'CompleteTodoItemAction', ['TodoModel']);
+
+serenity.register((model) => {
+
+  return function(item) {
+
+    model.setState({
+      items: [
+        ...model.items.filter(existing => existing !== item)
+      ]
+    });
   }
 }, 'DeleteTodoItemAction', ['TodoModel']);
